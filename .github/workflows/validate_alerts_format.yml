@@ -5,8 +5,10 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "master" ]
+    paths: ["alerts/**"]
   pull_request:
     branches: [ "master" ]
+    paths: ["alerts/**"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -46,6 +48,6 @@ jobs:
           echo "$file was added"
           if echo $file | grep -q "alerts"; then
             echo "running validate on $file"
-            python3 validate_alerts_format.py $file
+            python3 scripts/alerts/validate_alerts_format.py $file
           fi
          done
